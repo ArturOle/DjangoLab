@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% if user.is_authenticated and user.is_staff %}
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="ADD">
+    </form> 
+    </br>
+    </br>
+    Do you want to delete this news ?
+    This acction cannot be reversed !
+    <form action="delete/" method="post">
+        {% csrf_token %}
+        <input type="submit" value="delete">
+    </form>
+    {% elif user.is_authenticated %}
+    <p> You need staff previlege to modify news</p>
+    {% else %}
+    <p>To eddit new news you need to be logged in</p>
+    {% endif %}
+{% endblock %}
